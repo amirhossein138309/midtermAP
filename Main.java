@@ -10,6 +10,7 @@ public class Main {
         Card[] cards_3 = new Card[15];
         Card[] cards_prize = new Card[3];
         SlotMachine[] slot = new SlotMachine[5];
+        String x = new String();
 
 
         cards_1[0] = new Card(1, 0, 1, 1, 2,0, 0, 0);
