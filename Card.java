@@ -188,13 +188,13 @@ public class Card { // green = 0   blue = 1   white = 2    black = 3     red = 4
             break;
 
             case 2:
-            ph = new ImageIcon("C:\\Users\\sazgar\\Desktop\\ap_midterm - Copy\\photo\\level_1re.jpg");
+            ph = new ImageIcon("C:\\Users\\sazgar\\Desktop\\ap_midterm - Copy - Copy (2)\\photo\\level_2re.jpg");
             this.add_card_photo.setIcon(ph);
             this.card_panel.add(this.add_card_photo,BorderLayout.CENTER);
             break;
 
             case 3:
-            ph = new ImageIcon("C:\\Users\\sazgar\\Desktop\\ap_midterm - Copy\\photo\\level_1re.jpg");
+            ph = new ImageIcon("C:\\Users\\sazgar\\Desktop\\ap_midterm - Copy - Copy (2)\\photo\\level_3re.jpg");
             this.add_card_photo.setIcon(ph);
             this.card_panel.add(this.add_card_photo,BorderLayout.CENTER);
         }

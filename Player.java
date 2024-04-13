@@ -23,6 +23,7 @@ public class Player { //green = 0   blue = 1   white = 2    black = 3     red = 
     public int count_reserved_card = 0;
 
     public int give_slot = 0;
+    public int three_slot = 0;
 
 
     public JButton blue_button;
@@ -176,25 +177,25 @@ public class Player { //green = 0   blue = 1   white = 2    black = 3     red = 
     private void make_coin_button(){
         this.blue_button = new JButton();
         this.blue_button.setBackground(Color.BLUE);
-        this.blue_button.setVisible(true);
+        this.blue_button.setVisible(false);
 
         this.black_button = new JButton();
         this.black_button.setBackground(Color.BLACK);
-        this.black_button.setVisible(true);
+        this.black_button.setVisible(false);
 
         this.red_button = new JButton();
         this.red_button.setBackground(Color.RED);
-        this.red_button.setVisible(true);
+        this.red_button.setVisible(false);
 
         this.white_button = new JButton();
         this.white_button.setBackground(Color.WHITE);
-        this.white_button.setVisible(true);
+        this.white_button.setVisible(false);
 
         this.green_button = new JButton();
         this.green_button.setBackground(Color.GREEN);
-        this.green_button.setVisible(true);
+        this.green_button.setVisible(false);
     }
     public int sum_coin(){
-        return this.countBlack + this.countBlue + this.countGreen + this.countRed + this.countwhite;
+        return this.countBlack + this.countBlue + this.countGreen + this.countRed + this.countwhite + this.countGold;
     }
 }

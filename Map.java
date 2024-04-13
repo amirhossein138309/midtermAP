@@ -77,7 +77,10 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
         
         
         cards_action1(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
+        cards_action2(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
         slot_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
+        coin_player1_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
+        coin_player2_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
 
 
        
@@ -159,6 +162,16 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             }
         }
 
+        for(int i = 0 ; i < 15 ;i++){
+            if (cards_2[i].belong_player == 1 && cards_2[i].show_center_map == true){
+                cards_2[i].card_panel.setBackground(Color.BLUE);
+                cards_2[i].make_reserve_card(index);
+                player1_map.add(cards_2[i].buy_Button);
+                player1_map.add(cards_2[i].card_panel);
+                index++;
+            }
+        }
+
 
 
     }
@@ -233,6 +246,16 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                 cards_1[i].make_reserve_card(index);
                 player2_map.add(cards_1[i].buy_Button);
                 player2_map.add(cards_1[i].card_panel);
+                index++;
+            }
+        }
+
+        for(int i = 0 ; i < 15 ; i++){
+            if (cards_2[i].belong_player == 2 && cards_2[i].show_center_map == true){
+                cards_2[i].card_panel.setBackground(Color.CYAN);
+                cards_2[i].make_reserve_card(index);
+                player2_map.add(cards_2[i].buy_Button);
+                player2_map.add(cards_2[i].card_panel);
                 index++;
             }
         }
@@ -1249,16 +1272,120 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
-                    slot[0].add_coin(p1,2);
-                    turn = 2;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[0].count > 0){
+                        if (p1.three_slot > 0){
+                            p1.three_slot--;
+                            slot[0].add_coin(p1,1);
+                            slot[0].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p1.three_slot == 0){
+                                if (p1.sum_coin() > 10){
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p1);
+                                    able_slots(slot);
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p1.three_slot == 0){
+                            if (slot[0].count == 4){
+                                slot[0].add_coin(p1, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p1.sum_coin() > 10){
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[0].count < 4){
+                                slot[0].add_coin(p1,1);
+                                slot[0].button.setVisible(false);
+                                p1.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p1);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
                 else if (turn == 2){
-                    slot[0].add_coin(p2, 2);
-                    turn = 1;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[0].count > 0){
+                        if (p2.three_slot > 0){
+                            p2.three_slot--;
+                            slot[0].add_coin(p2,1);
+                            slot[0].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p2.three_slot == 0){
+                                if (p2.sum_coin() > 10){
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p2);
+                                    able_slots(slot);
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p2.three_slot == 0){
+                            if (slot[0].count == 4){
+                                slot[0].add_coin(p2, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p2.sum_coin() > 10){
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[0].count < 4){
+                                slot[0].add_coin(p2,1);
+                                slot[0].button.setVisible(false);
+                                p2.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -1267,16 +1394,120 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
-                    p1.countBlue++;
-                    turn = 2;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[1].count > 0){
+                        if (p1.three_slot > 0){
+                            p1.three_slot--;
+                            slot[1].add_coin(p1,1);
+                            slot[1].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p1.three_slot == 0){
+                                if (p1.sum_coin() > 10){
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p1);
+                                    able_slots(slot);
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p1.three_slot == 0){
+                            if (slot[1].count == 4){
+                                slot[1].add_coin(p1, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p1.sum_coin() > 10){
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[1].count < 4){
+                                slot[1].add_coin(p1,1);
+                                slot[1].button.setVisible(false);
+                                p1.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p1);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
                 else if (turn == 2){
-                    p2.countBlue++;
-                    turn = 1;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[1].count > 0){
+                        if (p2.three_slot > 0){
+                            p2.three_slot--;
+                            slot[1].add_coin(p2,1);
+                            slot[1].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p2.three_slot == 0){
+                                if (p2.sum_coin() > 10){
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p2);
+                                    able_slots(slot);
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p2.three_slot == 0){
+                            if (slot[1].count == 4){
+                                slot[1].add_coin(p2, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p2.sum_coin() > 10){
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[1].count < 4){
+                                slot[1].add_coin(p2,1);
+                                slot[1].button.setVisible(false);
+                                p2.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -1285,16 +1516,120 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
-                    p1.countwhite++;
-                    turn = 2;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[2].count > 0){
+                        if (p1.three_slot > 0){
+                            p1.three_slot--;
+                            slot[2].add_coin(p1,1);
+                            slot[2].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p1.three_slot == 0){
+                                if (p1.sum_coin() > 10){
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p1);
+                                    able_slots(slot);
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p1.three_slot == 0){
+                            if (slot[2].count == 4){
+                                slot[2].add_coin(p1, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p1.sum_coin() > 10){
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[1].count < 4){
+                                slot[2].add_coin(p1,1);
+                                slot[2].button.setVisible(false);
+                                p1.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p1);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
                 else if (turn == 2){
-                    p2.countwhite++;
-                    turn = 1;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[2].count > 0){
+                        if (p2.three_slot > 0){
+                            p2.three_slot--;
+                            slot[2].add_coin(p2,1);
+                            slot[2].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p2.three_slot == 0){
+                                if (p2.sum_coin() > 10){
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p2);
+                                    able_slots(slot);
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p2.three_slot == 0){
+                            if (slot[2].count == 4){
+                                slot[2].add_coin(p2, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p2.sum_coin() > 10){
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[2].count < 4){
+                                slot[2].add_coin(p2,1);
+                                slot[2].button.setVisible(false);
+                                p2.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -1303,16 +1638,120 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
-                    p1.countBlack++;
-                    turn = 2;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[3].count > 0){
+                        if (p1.three_slot > 0){
+                            p1.three_slot--;
+                            slot[3].add_coin(p1,1);
+                            slot[3].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p1.three_slot == 0){
+                                if (p1.sum_coin() > 10){
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p1);
+                                    able_slots(slot);
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p1.three_slot == 0){
+                            if (slot[3].count == 4){
+                                slot[3].add_coin(p1, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p1.sum_coin() > 10){
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[3].count < 4){
+                                slot[3].add_coin(p1,1);
+                                slot[3].button.setVisible(false);
+                                p1.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p1);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
                 else if (turn == 2){
-                    p2.countBlack++;
-                    turn = 1;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[3].count > 0){
+                        if (p2.three_slot > 0){
+                            p2.three_slot--;
+                            slot[3].add_coin(p2,1);
+                            slot[3].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p2.three_slot == 0){
+                                if (p2.sum_coin() > 10){
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p2);
+                                    able_slots(slot);
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p2.three_slot == 0){
+                            if (slot[3].count == 4){
+                                slot[3].add_coin(p2, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p2.sum_coin() > 10){
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[3].count < 4){
+                                slot[3].add_coin(p2,1);
+                                slot[3].button.setVisible(false);
+                                p2.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -1321,16 +1760,120 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
-                    p1.countRed++;
-                    turn = 2;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[4].count > 0){
+                        if (p1.three_slot > 0){
+                            p1.three_slot--;
+                            slot[4].add_coin(p1,1);
+                            slot[4].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p1.three_slot == 0){
+                                if (p1.sum_coin() > 10){
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p1);
+                                    able_slots(slot);
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p1.three_slot == 0){
+                            if (slot[4].count == 4){
+                                slot[4].add_coin(p1, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p1.sum_coin() > 10){
+                                    p1.give_slot = p1.sum_coin() - 10;
+                                    able_coin_button(p1);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 2;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[4].count < 4){
+                                slot[4].add_coin(p1,1);
+                                slot[4].button.setVisible(false);
+                                p1.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p1);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
                 else if (turn == 2){
-                    p2.countRed++;
-                    turn = 1;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
+                    if (slot[4].count > 0){
+                        if (p2.three_slot > 0){
+                            p2.three_slot--;
+                            slot[4].add_coin(p2,1);
+                            slot[4].button.setVisible(false);
+                            update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                            frame.setVisible(true);
+                            if (p2.three_slot == 0){
+                                if (p2.sum_coin() > 10){
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else{
+                                    able_cards(cards_1, cards_2, cards_3);
+                                    disable_coin_button(p2);
+                                    able_slots(slot);
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                        }
+                        else if (p2.three_slot == 0){
+                            if (slot[4].count == 4){
+                                slot[4].add_coin(p2, 2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                                if (p2.sum_coin() > 10){
+                                    p2.give_slot = p2.sum_coin() - 10;
+                                    able_coin_button(p2);
+                                    disable_cards(cards_1, cards_2, cards_3);
+                                    disable_slots(slot);
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                                else {
+                                    turn = 1;
+                                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                    frame.setVisible(true);
+                                }
+                            }
+                            else if (slot[4].count < 4){
+                                slot[4].add_coin(p2,1);
+                                slot[4].button.setVisible(false);
+                                p2.three_slot = 2;
+                                disable_cards(cards_1, cards_2, cards_3);
+                                disable_coin_button(p2);
+                                update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                                frame.setVisible(true);
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -1359,6 +1902,1047 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             cards_2[i].resereve_Button.setVisible(true);
             cards_3[i].resereve_Button.setVisible(true);
         }
+    }
+
+    public void able_coin_button(Player p){
+        p.black_button.setVisible(true);
+        p.blue_button.setVisible(true);
+        p.green_button.setVisible(true);
+        p.red_button.setVisible(true);
+        p.white_button.setVisible(true);
+    }
+    public void disable_coin_button(Player p){
+        p.black_button.setVisible(false);
+        p.blue_button.setVisible(false);
+        p.green_button.setVisible(false);
+        p.red_button.setVisible(false);
+        p.white_button.setVisible(false);
+    }
+
+    public void able_slots(SlotMachine slot[]){
+        for(int i = 0 ; i < 5 ;i++){
+            slot[i].button.setVisible(true);
+        }
+    }
+
+    public void disable_slots(SlotMachine slot[]){
+        for(int i = 0 ; i < 5 ;i++){
+            slot[i].button.setVisible(false);
+        }
+    }
+
+    public void cards_action2(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        cards_2[0].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[0])){
+                        p1.buy_card(cards_2[0]);
+                        turn = 2;
+                        cards_2[0].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[0])){
+                        turn = 1;
+                        p2.buy_card(cards_2[0]);
+                        cards_2[0].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[1].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[1])){
+                        p1.buy_card(cards_2[1]);
+                        cards_2[1].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[1])){
+                        p2.buy_card(cards_1[1]);
+                        cards_2[1].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[2].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[2])){
+                        p1.buy_card(cards_2[2]);
+                        cards_2[2].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_1[2])){
+                        p2.buy_card(cards_2[2]);
+                        cards_2[2].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[3].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[3])){
+                        p1.buy_card(cards_2[3]);
+                        cards_2[3].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[3])){
+                        p2.buy_card(cards_2[3]);
+                        cards_2[3].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[4].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[4])){
+                        p1.buy_card(cards_1[4]);
+                        cards_2[4].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[4])){
+                        p2.buy_card(cards_2[4]);
+                        cards_2[4].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[5].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[5])){
+                        p1.buy_card(cards_2[5]);
+                        cards_2[5].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 1){
+                    if (p2.allow_buy_card(cards_2[5])){
+                        p2.buy_card(cards_2[5]);
+                        cards_2[5].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_2[6].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[6])){
+                        p1.buy_card(cards_2[6]);
+                        cards_2[6].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 1){
+                    if (p2.allow_buy_card(cards_2[6])){
+                        p2.buy_card(cards_2[6]);
+                        cards_2[6].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_2[7].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[7])){
+                        p1.buy_card(cards_2[7]);
+                        cards_2[7].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[7])){
+                        p2.buy_card(cards_2[7]);
+                        cards_2[7].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[8].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[8])){
+                        p1.buy_card(cards_2[8]);
+                        cards_2[8].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[8])){
+                        p2.buy_card(cards_2[8]);
+                        cards_2[8].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[9].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[9])){
+                        p1.buy_card(cards_2[9]);
+                        cards_2[9].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[9])){
+                        p2.buy_card(cards_2[9]);
+                        cards_2[9].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[10].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[10])){
+                        p1.buy_card(cards_2[10]);
+                        cards_2[10].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[10])){
+                        p2.buy_card(cards_2[10]);
+                        cards_2[10].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[11].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1 ){
+                    if (p1.allow_buy_card(cards_2[11])){
+                        p1.buy_card(cards_2[11]);
+                        cards_2[11].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[11])){
+                        p2.buy_card(cards_2[11]);
+                        cards_2[11].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[12].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[12])){
+                        p1.buy_card(cards_2[12]);
+                        cards_2[12].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[12])){
+                        p2.buy_card(cards_2[12]);
+                        cards_2[12].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[13].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[13])){
+                        p1.buy_card(cards_2[13]);
+                        cards_2[13].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[13])){
+                        p2.buy_card(cards_2[13]);
+                        cards_2[13].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_2[14].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_2[14])){
+                        p1.buy_card(cards_2[14]);
+                        cards_2[14].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_2[14])){
+                        p2.buy_card(cards_2[14]);
+                        cards_2[14].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_2[0].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[0].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[0].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[1].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[1].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[1].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[2].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[2].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[2].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[3].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[3].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[3].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[4].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[4].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[4].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[5].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[5].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[5].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[6].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[6].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[6].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[7].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[7].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[7].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[8].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[8].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[8].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[9].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[9].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[9].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[10].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[10].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[10].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[11].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[11].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.countGold + p1.countGold < 5){
+                        p2.countGold++;
+                    }
+                    turn = 1;
+                    p2.count_reserved_card++;
+                    cards_2[11].belong_player = 2;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                }
+            }
+        });
+
+        cards_2[12].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[12].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[12].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[13].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[13].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[13].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_2[14].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[14].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                        p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_2[14].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+    }
+    public void coin_player1_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        p1.black_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countBlack > 0){
+                    p1.give_slot--;
+                    p1.countBlack--;
+                    slot[3].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.blue_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countBlue > 0){
+                    p1.give_slot--;
+                    p1.countBlue--;
+                    slot[1].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.white_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countwhite > 0){
+                    p1.give_slot--;
+                    p1.countwhite--;
+                    slot[2].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.green_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countGreen > 0){
+                    p1.give_slot--;
+                    p1.countGreen--;
+                    slot[0].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.red_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countRed > 0){
+                    p1.give_slot--;
+                    p1.countRed--;
+                    slot[4].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+    }
+    public void coin_player2_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        p2.black_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countBlack > 0){
+                    p2.give_slot--;
+                    p2.countBlack--;
+                    slot[3].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.blue_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countBlue > 0){
+                    p2.give_slot--;
+                    p2.countBlue--;
+                    slot[1].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.white_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countwhite > 0){
+                    p2.give_slot--;
+                    p2.countwhite--;
+                    slot[2].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.green_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countGreen > 0){
+                    p2.give_slot--;
+                    p2.countGreen--;
+                    slot[0].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.red_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countRed > 0){
+                    p2.give_slot--;
+                    p2.countRed--;
+                    slot[4].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
     }
 }
 
