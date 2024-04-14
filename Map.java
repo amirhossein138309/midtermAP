@@ -174,6 +174,16 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             }
         }
 
+        for(int i = 0 ; i < 15 ;i++){
+            if (cards_3[i].belong_player == 1 && cards_3[i].show_center_map == true){
+                cards_3[i].card_panel.setBackground(Color.BLUE);
+                cards_3[i].make_reserve_card(index);
+                player1_map.add(cards_3[i].buy_Button);
+                player1_map.add(cards_3[i].card_panel);
+                index++;
+            }
+        }
+
 
 
     }
@@ -258,6 +268,16 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                 cards_2[i].make_reserve_card(index);
                 player2_map.add(cards_2[i].buy_Button);
                 player2_map.add(cards_2[i].card_panel);
+                index++;
+            }
+        }
+
+        for(int i = 0 ; i < 15 ; i++){
+            if (cards_3[i].belong_player == 2 && cards_3[i].show_center_map == true){
+                cards_3[i].card_panel.setBackground(Color.CYAN);
+                cards_3[i].make_reserve_card(index);
+                player2_map.add(cards_3[i].buy_Button);
+                player2_map.add(cards_3[i].card_panel);
                 index++;
             }
         }
@@ -2722,7 +2742,7 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                         }
                         turn = 2;
                         p1.count_reserved_card++;
-                        cards_2[14].belong_player = 1;
+                        cards_3[14].belong_player = 1;
                         update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
                         frame.setVisible(true);
                     }
