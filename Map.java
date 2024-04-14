@@ -78,9 +78,11 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
         
         cards_action1(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
         cards_action2(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
+        cards_action3(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
         slot_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
         coin_player1_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
         coin_player2_action(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot, frame);
+        
 
 
        
@@ -1931,6 +1933,1019 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
         }
     }
 
+    public void cards_action3(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        cards_3[0].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[0])){
+                        p1.buy_card(cards_3[0]);
+                        turn = 2;
+                        cards_3[0].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[0])){
+                        turn = 1;
+                        p2.buy_card(cards_3[0]);
+                        cards_3[0].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[1].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[1])){
+                        p1.buy_card(cards_3[1]);
+                        cards_3[1].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[1])){
+                        p2.buy_card(cards_3[1]);
+                        cards_3[1].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[2].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[2])){
+                        p1.buy_card(cards_3[2]);
+                        cards_3[2].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[2])){
+                        p2.buy_card(cards_3[2]);
+                        cards_3[2].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[3].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[3])){
+                        p1.buy_card(cards_3[3]);
+                        cards_3[3].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[3])){
+                        p2.buy_card(cards_3[3]);
+                        cards_3[3].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[4].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[4])){
+                        p1.buy_card(cards_3[4]);
+                        cards_3[4].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[4])){
+                        p2.buy_card(cards_3[4]);
+                        cards_3[4].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[5].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[5])){
+                        p1.buy_card(cards_3[5]);
+                        cards_3[5].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 1){
+                    if (p2.allow_buy_card(cards_3[5])){
+                        p2.buy_card(cards_3[5]);
+                        cards_3[5].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_3[6].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[6])){
+                        p1.buy_card(cards_3[6]);
+                        cards_3[6].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 1){
+                    if (p2.allow_buy_card(cards_3[6])){
+                        p2.buy_card(cards_3[6]);
+                        cards_3[6].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_3[7].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[7])){
+                        p1.buy_card(cards_3[7]);
+                        cards_3[7].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[7])){
+                        p2.buy_card(cards_3[7]);
+                        cards_3[7].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[8].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[8])){
+                        p1.buy_card(cards_3[8]);
+                        cards_3[8].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[8])){
+                        p2.buy_card(cards_3[8]);
+                        cards_3[8].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[9].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[9])){
+                        p1.buy_card(cards_3[9]);
+                        cards_3[9].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[9])){
+                        p2.buy_card(cards_3[9]);
+                        cards_3[9].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[10].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[10])){
+                        p1.buy_card(cards_3[10]);
+                        cards_3[10].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[10])){
+                        p2.buy_card(cards_3[10]);
+                        cards_3[10].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[11].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1 ){
+                    if (p1.allow_buy_card(cards_3[11])){
+                        p1.buy_card(cards_3[11]);
+                        cards_3[11].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[11])){
+                        p2.buy_card(cards_3[11]);
+                        cards_3[11].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[12].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[12])){
+                        p1.buy_card(cards_3[12]);
+                        cards_3[12].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[12])){
+                        p2.buy_card(cards_3[12]);
+                        cards_3[12].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[13].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[13])){
+                        p1.buy_card(cards_3[13]);
+                        cards_3[13].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[13])){
+                        p2.buy_card(cards_3[13]);
+                        cards_3[13].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+            }
+        });
+
+        cards_3[14].buy_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.allow_buy_card(cards_3[14])){
+                        p1.buy_card(cards_3[14]);
+                        cards_3[14].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 2;
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.allow_buy_card(cards_3[14])){
+                        p2.buy_card(cards_3[14]);
+                        cards_3[14].show_center_map = false;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                        turn = 1;
+                    }
+                }
+            }
+        });
+
+        cards_3[0].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[0].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[0].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[1].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[1].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[1].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[2].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[2].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[2].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[3].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[3].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[3].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[4].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[4].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[4].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[5].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[5].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[5].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[6].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[6].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[6].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[7].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[7].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[7].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[8].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[8].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[8].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[9].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[9].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[9].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[10].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[10].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[10].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[11].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[11].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.countGold + p1.countGold < 5){
+                        p2.countGold++;
+                    }
+                    turn = 1;
+                    p2.count_reserved_card++;
+                    cards_3[11].belong_player = 2;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                }
+            }
+        });
+
+        cards_3[12].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[12].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[12].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[13].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_3[13].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                            p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[13].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        cards_3[14].resereve_Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (turn == 1){
+                    if (p1.count_reserved_card < 3){
+                        if (p1.countGold + p2.countGold < 5){
+                            p1.countGold++;
+                        }
+                        turn = 2;
+                        p1.count_reserved_card++;
+                        cards_2[14].belong_player = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+                else if (turn == 2){
+                    if (p2.count_reserved_card < 3){
+                        if (p2.countGold + p1.countGold < 5){
+                        p2.countGold++;
+                        }
+                        turn = 1;
+                        p2.count_reserved_card++;
+                        cards_3[14].belong_player = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                }
+            }
+        });
+    }
+    public void coin_player1_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        p1.black_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countBlack > 0){
+                    p1.give_slot--;
+                    p1.countBlack--;
+                    slot[3].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.blue_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countBlue > 0){
+                    p1.give_slot--;
+                    p1.countBlue--;
+                    slot[1].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.white_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countwhite > 0){
+                    p1.give_slot--;
+                    p1.countwhite--;
+                    slot[2].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.green_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countGreen > 0){
+                    p1.give_slot--;
+                    p1.countGreen--;
+                    slot[0].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p1.red_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p1.countRed > 0){
+                    p1.give_slot--;
+                    p1.countRed--;
+                    slot[4].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p1);
+                        able_slots(slot);
+                        turn = 2;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+    }
+    public void coin_player2_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
+        p2.black_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countBlack > 0){
+                    p2.give_slot--;
+                    p2.countBlack--;
+                    slot[3].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p1.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.blue_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countBlue > 0){
+                    p2.give_slot--;
+                    p2.countBlue--;
+                    slot[1].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.white_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countwhite > 0){
+                    p2.give_slot--;
+                    p2.countwhite--;
+                    slot[2].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.green_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countGreen > 0){
+                    p2.give_slot--;
+                    p2.countGreen--;
+                    slot[0].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+        p2.red_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(p2.countRed > 0){
+                    p2.give_slot--;
+                    p2.countRed--;
+                    slot[4].count++;
+                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                    frame.setVisible(true);
+                    if (p2.give_slot == 0){
+                        able_cards(cards_1, cards_2, cards_3);
+                        disable_coin_button(p2);
+                        able_slots(slot);
+                        turn = 1;
+                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
+                        frame.setVisible(true);
+                    }
+                } 
+            }
+        });
+    }
     public void cards_action2(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
         cards_2[0].buy_Button.addActionListener(new ActionListener() {
             @Override
@@ -1970,7 +2985,7 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                 }
                 else if (turn == 2){
                     if (p2.allow_buy_card(cards_2[1])){
-                        p2.buy_card(cards_1[1]);
+                        p2.buy_card(cards_2[1]);
                         cards_2[1].show_center_map = false;
                         update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
                         frame.setVisible(true);
@@ -1993,7 +3008,7 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                     }
                 }
                 else if (turn == 2){
-                    if (p2.allow_buy_card(cards_1[2])){
+                    if (p2.allow_buy_card(cards_2[2])){
                         p2.buy_card(cards_2[2]);
                         cards_2[2].show_center_map = false;
                         update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
@@ -2033,7 +3048,7 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
             public void actionPerformed(ActionEvent e) {
                 if (turn == 1){
                     if (p1.allow_buy_card(cards_2[4])){
-                        p1.buy_card(cards_1[4]);
+                        p1.buy_card(cards_2[4]);
                         cards_2[4].show_center_map = false;
                         update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
                         frame.setVisible(true);
@@ -2737,210 +3752,6 @@ public class Map{  //green = 0   blue = 1   white = 2    black = 3     red = 4
                         frame.setVisible(true);
                     }
                 }
-            }
-        });
-    }
-    public void coin_player1_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
-        p1.black_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p1.countBlack > 0){
-                    p1.give_slot--;
-                    p1.countBlack--;
-                    slot[3].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p1);
-                        able_slots(slot);
-                        turn = 2;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p1.blue_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p1.countBlue > 0){
-                    p1.give_slot--;
-                    p1.countBlue--;
-                    slot[1].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p1);
-                        able_slots(slot);
-                        turn = 2;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p1.white_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p1.countwhite > 0){
-                    p1.give_slot--;
-                    p1.countwhite--;
-                    slot[2].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p1);
-                        able_slots(slot);
-                        turn = 2;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p1.green_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p1.countGreen > 0){
-                    p1.give_slot--;
-                    p1.countGreen--;
-                    slot[0].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p1);
-                        able_slots(slot);
-                        turn = 2;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p1.red_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p1.countRed > 0){
-                    p1.give_slot--;
-                    p1.countRed--;
-                    slot[4].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p1);
-                        able_slots(slot);
-                        turn = 2;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-    }
-    public void coin_player2_action(Player p1,Player p2,Card[] cards_1,Card[] cards_2,Card[] cards_3,Card[] cards_prize,SlotMachine[] slot,JFrame frame){
-        p2.black_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p2.countBlack > 0){
-                    p2.give_slot--;
-                    p2.countBlack--;
-                    slot[3].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p1.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p2);
-                        able_slots(slot);
-                        turn = 1;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p2.blue_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p2.countBlue > 0){
-                    p2.give_slot--;
-                    p2.countBlue--;
-                    slot[1].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p2.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p2);
-                        able_slots(slot);
-                        turn = 1;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p2.white_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p2.countwhite > 0){
-                    p2.give_slot--;
-                    p2.countwhite--;
-                    slot[2].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p2.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p2);
-                        able_slots(slot);
-                        turn = 1;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p2.green_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p2.countGreen > 0){
-                    p2.give_slot--;
-                    p2.countGreen--;
-                    slot[0].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p2.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p2);
-                        able_slots(slot);
-                        turn = 1;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
-            }
-        });
-        p2.red_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                if(p2.countRed > 0){
-                    p2.give_slot--;
-                    p2.countRed--;
-                    slot[4].count++;
-                    update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                    frame.setVisible(true);
-                    if (p2.give_slot == 0){
-                        able_cards(cards_1, cards_2, cards_3);
-                        disable_coin_button(p2);
-                        able_slots(slot);
-                        turn = 1;
-                        update_map(p1, p2, cards_1, cards_2, cards_3, cards_prize, slot);
-                        frame.setVisible(true);
-                    }
-                } 
             }
         });
     }
