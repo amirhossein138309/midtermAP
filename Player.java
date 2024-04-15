@@ -5,12 +5,12 @@ public class Player { //green = 0   blue = 1   white = 2    black = 3     red = 
     public int point = 0;
     public int player;
 
-    public int countBlue = 0;
-    public int countRed = 0;
-    public int countwhite = 0;
-    public int countBlack = 0;
-    public int countGreen = 0;
-    public int countGold = 0;
+    public int countBlue = 20;
+    public int countRed = 20;
+    public int countwhite = 20;
+    public int countBlack = 20;
+    public int countGreen = 20;
+    public int countGold = 20;
     public int komaki_gold = 0;
 
     public int khas_blue = 0;
